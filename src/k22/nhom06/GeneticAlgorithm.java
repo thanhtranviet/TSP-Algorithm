@@ -28,7 +28,7 @@ public class GeneticAlgorithm {
     		population.saveTour(0, startTour);
     	//}
     	population = GeneticAlgorithm.evolvePopulation(population);
-        int generation = TourManager.numberOfCities();
+        int generation = Math.min(100, TourManager.numberOfCities());
         for (int i = 0; i < generation; i++) {
         	population = GeneticAlgorithm.evolvePopulation(population);
         }

@@ -134,6 +134,8 @@ public class Main {
 		//testDP();
 		//testBnBHK();
 		testGreedy();
+		//testLS();
+		//testGen();
 	}
 
 	
@@ -237,6 +239,31 @@ public class Main {
 				Population pop = new Population(1, false);
 				pop = al.solve();
 				s.times.add(al.executionTime);
+				
+			}
+			summary.add(s);
+			printresult(summary);
+		}
+		
+		printresult(summary);
+	
+	}
+	
+	private static void testGen() {
+		//System.out.println("Cities; Time; Value");
+		ArrayList<Summary> summary = new ArrayList<>();
+		for(int i = 1; i<=10; i++){
+			TourManager.generateCities(i*50, 200);
+			Summary s = new Summary();
+			s.city = i*50;
+			for (int j = 0; j <5; j++){
+				GreedyAlgorithm al0 = new GreedyAlgorithm();
+				Population pop0 = new Population(1, false);
+				pop0 = al0.solve(new Tour(TourManager.getCities()));
+				
+				Population pop = GeneticAlgorithm.solve(new Tour(pop0.getFittest().getCities()));
+
+				s.times.add(GeneticAlgorithm.executionTime);
 				
 			}
 			summary.add(s);
